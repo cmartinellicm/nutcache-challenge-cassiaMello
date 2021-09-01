@@ -1,9 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { apiURL } from "../App";
 import axios from "axios";
 
-const Form = (props) => {
-  const apiURL = props.apiURL;
-
+const Form = () => {
   const [form, setForm] = useState({
     name: "",
     birthDate: "",

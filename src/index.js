@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-window.apiURL = "https://crudcrud.com/api/e3bde658a6b545839fc3998ef86399bf";
+// window.apiURL = "https://crudcrud.com/api/e3bde658a6b545839fc3998ef86399bf";
 
 ReactDOM.render(
   <React.StrictMode>

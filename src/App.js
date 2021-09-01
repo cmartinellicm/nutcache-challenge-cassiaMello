@@ -2,12 +2,15 @@ import "./App.css";
 import Form from "./components/Form";
 import Table from "./components/Table";
 
-const App = () => {
+export const apiURL = "https://crudcrud.com/api/809b84cc1a18424a9d16915249ed94c3";
+// export const apiURL = "";
+
+export default function App() {
   return (
     <>
-      <Form apiURL={window.apiURL}></Form>
+      <Table />
+      <hr />
+      <Form />
     </>
   );
-};
-
-export default App;
+}
