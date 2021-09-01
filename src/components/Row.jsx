@@ -9,9 +9,8 @@ const Row = (props) => {
       <td>{props.startDate}</td>
       <td>{props.team}</td>
       <td>
-        <Button id={props.id} action="Edit" />
-        <Button id={props.id} name={props.name} action="Delete" />
-        {props.id}
+        <Button id={props.id} action="Edit" update={props.listEmployees} />
+        <Button id={props.id} name={props.name} action="Delete" update={props.listEmployees} />
       </td>
     </tr>
   );

@@ -1,14 +1,29 @@
 import React from "react";
+import Form from "./Form";
 import { apiURL } from "../App";
 import axios from "axios";
 
 const Button = (props) => {
-  const handleAction = (e) => {
+  const updateTable = () => {
+    props.update();
+  };
+
+  const handleAction = () => {
     switch (props.action) {
       case "Edit":
         // Edit employee
-        console.log("Edit selected");
+        axios
+          .get(apiURL + "/nutemployee/" + props.id)
+          .then((response) => {
+            <Form />;
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
         break;
+
       case "Delete":
         if (window.confirm("Are you sure you want to delete employee " + props.name + "?")) {
           // Delete employee
@@ -16,6 +31,7 @@ const Button = (props) => {
             .delete(apiURL + "/nutemployee/" + props.id)
             .then(() => {
               alert("Employee deleted");
+              updateTable();
             })
             .catch((error) => {
               console.log(error);
@@ -25,20 +41,6 @@ const Button = (props) => {
       default:
         console.log("Invalid option");
     }
-    // if (props.action === "Edit") {
-    //   // Handle edit
-    //   console.log("edit " + props.id);
-    // } else if (props.action === "Delete") {
-    //   // Delete employee
-    //   axios
-    //     .get(apiURL + "/nutemployee/" + props.id)
-    //     .then(function (response) {
-    //       alert("Are you sure you want to delete employee " + props.name + "?");
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // }
   };
 
   return (
