@@ -10,12 +10,15 @@ const Button = (props) => {
 
   const handleAction = () => {
     switch (props.action) {
-      case "Edit":
+      case "add":
+        console.log("Add employee");
+        break;
+      case "edit":
         // Edit employee
         axios
           .get(apiURL + "/nutemployee/" + props.id)
           .then((response) => {
-            <Form />;
+            // Show form with employee
             console.log(response.data);
           })
           .catch((error) => {
@@ -24,7 +27,7 @@ const Button = (props) => {
 
         break;
 
-      case "Delete":
+      case "delete":
         if (window.confirm("Are you sure you want to delete employee " + props.name + "?")) {
           // Delete employee
           axios
@@ -45,7 +48,7 @@ const Button = (props) => {
 
   return (
     <button type="submit" onClick={handleAction}>
-      {props.action}
+      {props.text}
     </button>
   );
 };

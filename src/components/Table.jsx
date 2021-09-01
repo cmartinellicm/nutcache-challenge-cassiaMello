@@ -26,7 +26,6 @@ const Table = () => {
 
   return (
     <>
-      <h1>Nutcache Employees</h1>
       <table>
         <thead>
           <tr>

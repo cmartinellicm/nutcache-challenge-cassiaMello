@@ -6,3 +6,4 @@
 4. Create Table component linsting all employees on main page
 5. Create action buttons to Edit and Delete employee
 6. Handle delete action using axios
+7. Create Add Employee button to open modal with registration Form
