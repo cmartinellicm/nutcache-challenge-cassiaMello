@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import Form from "./Form";
 
-const Modal = () => {
-  const [showModal, setShowModal] = useState(false);
+const Modal = (props) => {
+  // const [showModal, setShowModal] = useState(false);
 
-  const modalClass = showModal ? "modal show-modal" : "modal hide-modal";
+  const modalClass = props.visible ? "modal show-modal" : "modal hide-modal";
 
-  const handleShowModal = () => {
-    setShowModal(true);
-  };
+  // const handleShowModal = () => {
+  //   setShowModal(true);
+  // };
 
   const handleClose = () => {
-    setShowModal(false);
+    props.handleVisible(false);
   };
 
   return (
     <>
-      <button id="myBtn" onClick={() => handleShowModal()}>
+      {/* <button id="myBtn" onClick={() => handleShowModal()}>
         Add Employee
-      </button>
+      </button> */}
 
       <div id="myModal" className={modalClass}>
         <div className="modal-content">
