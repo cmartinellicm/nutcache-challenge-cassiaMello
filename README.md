@@ -1,7 +1,7 @@
 # Project: Nutcache Technical Challenge
 Web application to facilitate people management proposed by Nutcache (front-end software engineer technical challenge). The solution should be implemented using React.
 
-To run the application, create an API endpoit using https://crudcrud.com/ and replace the URL on /src/App.js `apiURL` declaration.
+To run the application, create an API endpoint using https://crudcrud.com/ and replace the URL on /src/App.js `apiURL` declaration. Then run `npm strat`.
 
 ## Implementation steps
 

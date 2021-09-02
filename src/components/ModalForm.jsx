@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { apiURL } from "../App";
 import axios from "axios";
+import InputMask from "react-input-mask";
 
 const ModalForm = (props) => {
   const [form, setForm] = useState({
@@ -174,7 +175,8 @@ const ModalForm = (props) => {
                     <label htmlFor="cpf">CPF</label>
                   </td>
                   <td className="modalTable">
-                    <input
+                    <InputMask
+                      mask="999.999.999-99"
                       className="modalInput"
                       type="text"
                       name="cpf"
@@ -192,7 +194,8 @@ const ModalForm = (props) => {
                     <label htmlFor="startDate">Start Date</label>
                   </td>
                   <td className="modalTable">
-                    <input
+                    <InputMask
+                      mask="99/9999"
                       className="modalInput"
                       type="text"
                       name="startDate"
