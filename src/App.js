@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 import Table from "./components/Table";
-import Modal from "./components/Modal";
+import ModalForm from "./components/ModalForm";
 
-export const apiURL = "https://crudcrud.com/api/499e0ab24bb140599441c43d5346319b";
+export const apiURL = "https://crudcrud.com/api/147988cb7c004335be50858b3d43d763";
 // export const apiURL = "";
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
       <button id="myBtn" onClick={() => handleShowModal()}>
         Add Employee
       </button>
-      {showModal && <Modal visible={showModal} handleVisible={setShowModal} />}
+      {showModal && <ModalForm visible={showModal} handleVisible={setShowModal} type="add" />}
       <Table />
     </>
   );
