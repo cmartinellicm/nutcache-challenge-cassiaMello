@@ -16,6 +16,6 @@ To run the application, create an API endpoit using https://crudcrud.com/ and re
 9. Implement 'View' button to show employee information 
 10. Formatted interface using CSS
 
-## Next steps (sugested)
+## Next steps (suggested)
 
 - Use Material-UI to improve design
