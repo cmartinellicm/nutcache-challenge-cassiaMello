@@ -1,4 +1,9 @@
-Project proposed by Nutcache as technical challenge using React
+# Project: Nutcache Technical Challenge
+Web application to facilitate people management proposed by Nutcache (front-end software engineer technical challenge). The solution should be implemented using React.
+
+To run the application, create an API endpoit using https://crudcrud.com/ and replace the URL on /src/App.js `apiURL` declaration.
+
+## Implementation steps
 
 1. Start project with Create React App
 2. Create Form component to input employees information
@@ -9,3 +14,8 @@ Project proposed by Nutcache as technical challenge using React
 7. Implement 'Add Employee' button to open modal with registration Form
 8. Implement 'Edit' button to open modal to edit employee
 9. Implement 'View' button to show employee information 
+10. Formatted interface using CSS
+
+## Next steps (sugested)
+
+- Use Material-UI to improve design
