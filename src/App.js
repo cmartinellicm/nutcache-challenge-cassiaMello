@@ -1,25 +1,12 @@
-import React, { useState } from "react";
-import "./App.css";
+import React from "react";
 import Table from "./components/Table";
-import ModalForm from "./components/ModalForm";
 
-export const apiURL = "https://crudcrud.com/api/13be49e3ded0449dbb04b520220cb4da";
-// export const apiURL = "";
+export const apiURL = "https://crudcrud.com/api/0bce13716a77424fb41a17fb9f067e33";
 
 export default function App() {
-  const [showModal, setShowModal] = useState(false);
-
-  const handleShowModal = () => {
-    setShowModal(true);
-  };
-
   return (
     <>
       <h1>Nutcache Employees</h1>
-      <button id="myBtn" onClick={() => handleShowModal()}>
-        Add Employee
-      </button>
-      {showModal && <ModalForm visible={showModal} handleVisible={setShowModal} type="add" />}
       <Table />
     </>
   );

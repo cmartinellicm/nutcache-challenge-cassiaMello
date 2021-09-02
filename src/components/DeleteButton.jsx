@@ -23,7 +23,7 @@ const DeleteButton = (props) => {
 
   return (
     <button type="submit" onClick={handleAction}>
-      {props.text}
+      Delete
     </button>
   );
 };

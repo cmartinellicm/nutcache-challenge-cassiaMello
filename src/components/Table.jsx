@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Row from "./Row";
+import ModalForm from "./ModalForm";
 import { apiURL } from "../App";
 import axios from "axios";
 
@@ -17,22 +18,22 @@ const Table = () => {
       });
   };
 
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
   useEffect(() => {
     listEmployees();
   }, []);
 
-  function handlePut() {
-    axios
-      .put("https://crudcrud.com/api/d0908dbd110b402cb9e0140f09f1b506/unicorns/6130d20cdc46c203e8b3cd2b", { name: "piooo", age: 666, colour: "amarela" })
-      .then((res) => {
-        console.log("response: ", res.data);
-      })
-      .catch((err) => {});
-  }
-
   return (
     <>
-      <button onClick={handlePut}>PUT</button>
+      <button id="myBtn" onClick={() => handleShowModal()}>
+        Add Employee
+      </button>
+      {showModal && <ModalForm visible={showModal} handleVisible={setShowModal} action="add" update={listEmployees} />}
       <table>
         <thead>
           <tr>
