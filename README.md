@@ -7,4 +7,5 @@
 5. Create action buttons to Edit and Delete employee
 6. Handle delete action using axios
 7. Implement 'Add Employee' button to open modal with registration Form
-8. Implement 'Edit Employee' button to open modal to edit employee
+8. Implement 'Edit' button to open modal to edit employee
+9. Implement 'View' button to show employee information 

@@ -17,9 +17,9 @@ const ModalForm = (props) => {
 
   const modalClass = props.visible ? "modal show-modal" : "modal hide-modal";
 
-  // const updateTable = () => {
-  //   props.update();
-  // };
+  const updateTable = () => {
+    props.update();
+  };
 
   useEffect(() => {
     switch (props.action) {
@@ -59,7 +59,7 @@ const ModalForm = (props) => {
           .then(() => {
             alert("Employee created successfully!");
             handleClose();
-            // Update table
+            updateTable();
           })
           .catch((error) => {
             console.log(error);
@@ -71,7 +71,7 @@ const ModalForm = (props) => {
           .then(() => {
             alert("Employee updated successfully!");
             handleClose();
-            // Update table
+            updateTable();
           })
           .catch((error) => {
             console.log(error);
