@@ -3,8 +3,6 @@ import Row from "./Row";
 import { apiURL } from "../App";
 import axios from "axios";
 
-// import employees from "../employees";
-
 const Table = () => {
   const [employees, setEmployees] = useState([]);
 
@@ -15,7 +13,6 @@ const Table = () => {
         setEmployees(response.data);
       })
       .catch((error) => {
-        // handle error
         console.log(error);
       });
   };
@@ -24,8 +21,18 @@ const Table = () => {
     listEmployees();
   }, []);
 
+  function handlePut() {
+    axios
+      .put("https://crudcrud.com/api/d0908dbd110b402cb9e0140f09f1b506/unicorns/6130d20cdc46c203e8b3cd2b", { name: "piooo", age: 666, colour: "amarela" })
+      .then((res) => {
+        console.log("response: ", res.data);
+      })
+      .catch((err) => {});
+  }
+
   return (
     <>
+      <button onClick={handlePut}>PUT</button>
       <table>
         <thead>
           <tr>

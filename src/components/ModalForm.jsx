@@ -4,19 +4,23 @@ import axios from "axios";
 
 const ModalForm = (props) => {
   const [form, setForm] = useState({
-    // name: "",
-    // birthDate: "",
-    // gender: "",
-    // email: "",
-    // cpf: "",
-    // startDate: "",
-    // team: "",
+    name: "",
+    birthDate: "",
+    gender: "",
+    email: "",
+    cpf: "",
+    startDate: "",
+    team: "",
   });
+
+  // const updateTable = () => {
+  //   props.update();
+  // };
 
   useEffect(() => {
     switch (props.type) {
       case "add":
-        setForm({ name: "", birthDate: "", gender: "", email: "", cpf: "", estadoCivil: "", startDate: "", team: "" });
+        setForm({ name: "", birthDate: "", gender: "", email: "", cpf: "", startDate: "", team: "" });
         break;
       case "edit":
         axios
@@ -29,12 +33,20 @@ const ModalForm = (props) => {
           .catch((error) => {
             console.log(error);
           });
-
         break;
       default:
         break;
     }
   }, []);
+
+  function handlePut() {
+    axios
+      .put("https://crudcrud.com/api/d0908dbd110b402cb9e0140f09f1b506/unicorns/6130d20cdc46c203e8b3cd2b", { name: "piooo", age: 33, colour: "amarela" })
+      .then((res) => {
+        console.log("response: ", res.data);
+      })
+      .catch((err) => {});
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,26 +54,37 @@ const ModalForm = (props) => {
       case "add":
         axios
           .post(apiURL + "/nutemployee", form)
-          .then(function (response) {
+          .then(() => {
             alert("Employee created successfully!");
-            setForm({ name: "", birthDate: "", gender: "", email: "", cpf: "", estadoCivil: "", startDate: "", team: "" });
-            // Close modal and update table
+            handleClose();
           })
-          .catch(function (error) {
+          .catch((error) => {
             console.log(error);
           });
         break;
       case "edit":
-        axios
-          .put(apiURL + "/nutemployee/" + props.id, form)
+        axios({
+          method: "put",
+          url: apiURL + "/nutemployee/" + props.id,
+          data: { name: form.name, birthDate: form.birthDate, gender: form.gender, email: form.email, cpf: form.cpf, startDate: form.startDate, team: form.team },
+        })
           .then(function (response) {
-            let employee = response.data;
             alert("Employee updated successfully!");
+            handleClose();
             // Close modal and update table
           })
           .catch(function (error) {
             console.log(error);
           });
+        // axios
+        //   .put(apiURL + "/nutemployee/" + props.id, form)
+        //   .then(function (response) {
+        //     alert("Employee updated successfully!");
+        //     // Close modal and update table
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
         break;
       default:
         break;
@@ -72,6 +95,7 @@ const ModalForm = (props) => {
 
   const handleClose = () => {
     props.handleVisible(false);
+    props.update();
   };
 
   return (
