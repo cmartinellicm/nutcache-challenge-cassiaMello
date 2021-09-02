@@ -1,4 +1,4 @@
-
+Project proposed by Nutcache as technical challenge using React
 
 1. Start project with Create React App
 2. Create Form component to input employees information
