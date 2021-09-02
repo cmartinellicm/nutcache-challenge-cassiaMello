@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import ModalForm from "./ModalForm";
+import ModalView from "./ModalView";
 import DeleteButton from "./DeleteButton";
 
 const Row = (props) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModalForm, setShowModalForm] = useState(false);
+  const [showModalView, setShowModalView] = useState(false);
 
-  const handleShowModal = () => {
-    setShowModal(true);
+  const handleShowModalForm = () => {
+    setShowModalForm(true);
+  };
+
+  const handleShowModalView = () => {
+    setShowModalView(true);
   };
 
   return (
@@ -16,12 +22,10 @@ const Row = (props) => {
       <td>{props.startDate}</td>
       <td>{props.team}</td>
       <td>
-        <button onClick={() => handleShowModal()}>View</button>
-        {showModal && <ModalForm visible={showModal} handleVisible={setShowModal} id={props.id} action="view" />}
-
-        <button onClick={() => handleShowModal()}>Edit</button>
-        {showModal && <ModalForm visible={showModal} handleVisible={setShowModal} id={props.id} action="edit" update={props.listEmployees} />}
-
+        <button onClick={() => handleShowModalView()}>View</button>
+        {showModalView && <ModalView visible={showModalView} handleVisible={setShowModalView} id={props.id} action="view" />}
+        <button onClick={() => handleShowModalForm()}>Edit</button>
+        {showModalForm && <ModalForm visible={showModalForm} handleVisible={setShowModalForm} id={props.id} action="edit" update={props.listEmployees} />}
         <DeleteButton id={props.id} name={props.name} action="delete" update={props.listEmployees} />
       </td>
     </tr>
