@@ -22,9 +22,13 @@ const Row = (props) => {
       <td>{props.startDate}</td>
       <td>{props.team}</td>
       <td>
-        <button onClick={() => handleShowModalView()}>View</button>
+        <button className="actionButton" onClick={() => handleShowModalView()}>
+          View
+        </button>
         {showModalView && <ModalView visible={showModalView} handleVisible={setShowModalView} id={props.id} action="view" />}
-        <button onClick={() => handleShowModalForm()}>Edit</button>
+        <button className="actionButton" onClick={() => handleShowModalForm()}>
+          Edit
+        </button>
         {showModalForm && <ModalForm visible={showModalForm} handleVisible={setShowModalForm} id={props.id} action="edit" update={props.listEmployees} />}
         <DeleteButton id={props.id} name={props.name} action="delete" update={props.listEmployees} />
       </td>

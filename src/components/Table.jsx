@@ -30,7 +30,7 @@ const Table = () => {
 
   return (
     <>
-      <button id="myBtn" onClick={() => handleShowModal()}>
+      <button className="actionButton" id="myBtn" onClick={() => handleShowModal()}>
         Add Employee
       </button>
       {showModal && <ModalForm visible={showModal} handleVisible={setShowModal} action="add" update={listEmployees} />}

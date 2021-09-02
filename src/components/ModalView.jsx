@@ -37,34 +37,37 @@ const ModalView = (props) => {
           <span className="close" onClick={() => handleClose()}>
             &times;
           </span>
+
+          <h1>Employee Information</h1>
+
           <table>
             <tbody>
               <tr>
-                <td>Name</td>
+                <td className="modalViewLabel">Name</td>
                 <td>{employee.name}</td>
               </tr>
               <tr>
-                <td>Birth Date</td>
+                <td className="modalViewLabel">Birth Date</td>
                 <td>{employee.birthDate}</td>
               </tr>
               <tr>
-                <td>Gender</td>
+                <td className="modalViewLabel">Gender</td>
                 <td>{employee.gender}</td>
               </tr>
               <tr>
-                <td>Email</td>
+                <td className="modalViewLabel">Email</td>
                 <td>{employee.email}</td>
               </tr>
               <tr>
-                <td>CPF</td>
+                <td className="modalViewLabel">CPF</td>
                 <td>{employee.cpf}</td>
               </tr>
               <tr>
-                <td>Start Date</td>
+                <td className="modalViewLabel">Start Date</td>
                 <td>{employee.startDate}</td>
               </tr>
               <tr>
-                <td>Team</td>
+                <td className="modalViewLabel">Team</td>
                 <td>{employee.team}</td>
               </tr>
             </tbody>

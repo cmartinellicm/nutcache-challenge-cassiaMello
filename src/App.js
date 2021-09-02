@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "./components/Table";
 
-export const apiURL = "https://crudcrud.com/api/0bce13716a77424fb41a17fb9f067e33";
+export const apiURL = "https://crudcrud.com/api/29741fa10ea7448fac9fe65a95178d46";
 
 export default function App() {
   return (
