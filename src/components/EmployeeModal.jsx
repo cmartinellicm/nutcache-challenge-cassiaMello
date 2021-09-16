@@ -1,33 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { apiURL } from "../App";
-import axios from "axios";
+import React from "react";
 
-export default function EmployeeModal(props) {
-  const [employee, setEmployee] = useState({
-    name: "",
-    birthDate: "",
-    gender: "",
-    email: "",
-    cpf: "",
-    startDate: "",
-    team: "",
-  });
-
-  const modalClass = props.visible ? "modal show-modal" : "modal hide-modal";
-
-  useEffect(() => {
-    axios
-      .get(apiURL + "/nutemployee/" + props.id)
-      .then((res) => {
-        setEmployee(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [props]);
+export default function EmployeeModal({ visible, handleVisible, employee }) {
+  const modalClass = visible ? "modal show-modal" : "modal hide-modal";
 
   const handleClose = () => {
-    props.handleVisible(false);
+    handleVisible(false);
   };
 
   return (

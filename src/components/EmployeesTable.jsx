@@ -43,7 +43,7 @@ export default function EmployeesTable() {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>{employees && employees.map((employee) => <EmployeeRow key={employee._id} id={employee._id} name={employee.name} email={employee.email} startDate={employee.startDate} team={employee.team} listEmployees={listEmployees} />)}</tbody>
+        <tbody>{employees && employees.map((employee) => <EmployeeRow key={employee._id} employee={employee} listEmployees={listEmployees} />)}</tbody>
       </table>
     </>
   );

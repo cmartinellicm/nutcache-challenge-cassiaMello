@@ -3,7 +3,7 @@ import AddEditModal from "./AddEditModal";
 import EmployeeModal from "./EmployeeModal";
 import DeleteButton from "./DeleteButton";
 
-export default function EmployeeRow(props) {
+export default function EmployeeRow({ employee }) {
   const [showAddEditModal, setShowAddEditModal] = useState(false);
   const [showEmployeeModal, setShowEmployeeModal] = useState(false);
 
@@ -17,22 +17,22 @@ export default function EmployeeRow(props) {
 
   return (
     <tr>
-      <td>{props.name}</td>
-      <td>{props.email}</td>
-      <td>{props.startDate}</td>
-      <td>{props.team}</td>
+      <td>{employee.name}</td>
+      <td>{employee.email}</td>
+      <td>{employee.startDate}</td>
+      <td>{employee.team}</td>
       <td>
         <button type="button" className="actionButton" onClick={() => handleShowEmployeeModal()}>
           View
         </button>
-        {showEmployeeModal && <EmployeeModal visible={showEmployeeModal} handleVisible={setShowEmployeeModal} id={props.id} action="view" />}
+        {showEmployeeModal && <EmployeeModal visible={showEmployeeModal} handleVisible={setShowEmployeeModal} employee={employee} />}
 
         <button type="button" className="actionButton" onClick={() => handleShowAddEditModal()}>
           Edit
         </button>
-        {showAddEditModal && <AddEditModal visible={showAddEditModal} handleVisible={setShowAddEditModal} id={props.id} action="edit" update={props.listEmployees} />}
+        {showAddEditModal && <AddEditModal visible={showAddEditModal} handleVisible={setShowAddEditModal} id={employee.id} action="edit" update={employee.listEmployees} />}
 
-        <DeleteButton id={props.id} name={props.name} action="delete" update={props.listEmployees} />
+        <DeleteButton id={employee.id} name={employee.name} action="delete" update={employee.listEmployees} />
       </td>
     </tr>
   );
