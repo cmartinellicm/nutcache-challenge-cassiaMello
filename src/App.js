@@ -1,13 +1,13 @@
 import React from "react";
-import Table from "./components/Table";
+import EmployeesTable from "./components/EmployeesTable";
 
-export const apiURL = "https://crudcrud.com/api/29741fa10ea7448fac9fe65a95178d46";
+export const apiURL = "https://crudcrud.com/api/6e48435e6eda4f98b11e629877f03cdf";
 
 export default function App() {
   return (
     <>
       <h1>Nutcache Employees</h1>
-      <Table />
+      <EmployeesTable />
     </>
   );
 }

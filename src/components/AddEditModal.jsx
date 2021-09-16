@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { apiURL } from "../App";
 import axios from "axios";
 import InputMask from "react-input-mask";
+import { apiURL } from "../App";
 
-const ModalForm = (props) => {
-  const [form, setForm] = useState({
+export default function AddEditModal(props) {
+  const [employee, setEmployee] = useState({
     name: "",
     birthDate: "",
     gender: "",
@@ -14,24 +14,18 @@ const ModalForm = (props) => {
     team: "",
   });
 
-  console.log(props.action);
-
   const modalClass = props.visible ? "modal show-modal" : "modal hide-modal";
-
-  const updateTable = () => {
-    props.update();
-  };
 
   useEffect(() => {
     switch (props.action) {
       case "add":
-        setForm({ name: "", birthDate: "", gender: "", email: "", cpf: "", startDate: "", team: "" });
+        setEmployee({ name: "", birthDate: "", gender: "", email: "", cpf: "", startDate: "", team: "" });
         break;
       case "edit":
         axios
           .get(apiURL + "/nutemployee/" + props.id)
-          .then((res) => {
-            setForm(res.data);
+          .then((response) => {
+            setEmployee(response.data);
           })
           .catch((error) => {
             console.log(error);
@@ -40,14 +34,18 @@ const ModalForm = (props) => {
       default:
         break;
     }
-  }, [props]);
+  }, [props.action, props.id]);
+
+  const updateTable = () => {
+    props.update();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     switch (props.action) {
       case "add":
         axios
-          .post(apiURL + "/nutemployee", { name: form.name, birthDate: form.birthDate, gender: form.gender, email: form.email, cpf: form.cpf, startDate: form.startDate, team: form.team })
+          .post(apiURL + "/nutemployee", { name: employee.name, birthDate: employee.birthDate, gender: employee.gender, email: employee.email, cpf: employee.cpf, startDate: employee.startDate, team: employee.team })
           .then(() => {
             alert("Employee created successfully!");
             handleClose();
@@ -59,7 +57,7 @@ const ModalForm = (props) => {
         break;
       case "edit":
         axios
-          .put(apiURL + "/nutemployee/" + props.id, { name: form.name, birthDate: form.birthDate, gender: form.gender, email: form.email, cpf: form.cpf, startDate: form.startDate, team: form.team })
+          .put(apiURL + "/nutemployee/" + props.id, { name: employee.name, birthDate: employee.birthDate, gender: employee.gender, email: employee.email, cpf: employee.cpf, startDate: employee.startDate, team: employee.team })
           .then(() => {
             alert("Employee updated successfully!");
             handleClose();
@@ -80,7 +78,7 @@ const ModalForm = (props) => {
 
   return (
     <>
-      <div id="myModal" className={modalClass}>
+      <div className={modalClass}>
         <div className="modal-content">
           <span className="close" onClick={() => handleClose()}>
             &times;
@@ -102,9 +100,9 @@ const ModalForm = (props) => {
                       name="name"
                       id="name"
                       onChange={(e) => {
-                        setForm({ ...form, name: e.target.value });
+                        setEmployee({ ...employee, name: e.target.value });
                       }}
-                      value={form.name}
+                      value={employee.name}
                       size="50"
                       required
                     />
@@ -121,9 +119,9 @@ const ModalForm = (props) => {
                       name="birthDate"
                       id="birthDate"
                       onChange={(e) => {
-                        setForm({ ...form, birthDate: e.target.value });
+                        setEmployee({ ...employee, birthDate: e.target.value });
                       }}
-                      value={form.birthDate}
+                      value={employee.birthDate}
                       size="30"
                       required
                     />
@@ -139,9 +137,9 @@ const ModalForm = (props) => {
                       name="gender"
                       id="gender"
                       onChange={(e) => {
-                        setForm({ ...form, gender: e.target.value });
+                        setEmployee({ ...employee, gender: e.target.value });
                       }}
-                      value={form.gender}
+                      value={employee.gender}
                       required
                     >
                       <option value=""></option>
@@ -162,9 +160,9 @@ const ModalForm = (props) => {
                       name="email"
                       id="email"
                       onChange={(e) => {
-                        setForm({ ...form, email: e.target.value });
+                        setEmployee({ ...employee, email: e.target.value });
                       }}
-                      value={form.email}
+                      value={employee.email}
                       size="40"
                       required
                     />
@@ -182,9 +180,9 @@ const ModalForm = (props) => {
                       name="cpf"
                       id="cpf"
                       onChange={(e) => {
-                        setForm({ ...form, cpf: e.target.value });
+                        setEmployee({ ...employee, cpf: e.target.value });
                       }}
-                      value={form.cpf}
+                      value={employee.cpf}
                       required
                     />
                   </td>
@@ -201,9 +199,9 @@ const ModalForm = (props) => {
                       name="startDate"
                       id="startDate"
                       onChange={(e) => {
-                        setForm({ ...form, startDate: e.target.value });
+                        setEmployee({ ...employee, startDate: e.target.value });
                       }}
-                      value={form.startDate}
+                      value={employee.startDate}
                       required
                     />
                   </td>
@@ -218,9 +216,9 @@ const ModalForm = (props) => {
                       name="team"
                       id="team"
                       onChange={(e) => {
-                        setForm({ ...form, team: e.target.value });
+                        setEmployee({ ...employee, team: e.target.value });
                       }}
-                      value={form.team}
+                      value={employee.team}
                     >
                       <option value=""></option>
                       <option value="mobile">Mobile</option>
@@ -240,6 +238,4 @@ const ModalForm = (props) => {
       </div>
     </>
   );
-};
-
-export default ModalForm;
+}

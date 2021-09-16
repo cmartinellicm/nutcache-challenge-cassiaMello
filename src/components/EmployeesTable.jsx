@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Row from "./Row";
-import ModalForm from "./ModalForm";
-import { apiURL } from "../App";
 import axios from "axios";
+import { apiURL } from "../App";
+import EmployeeRow from "./EmployeeRow";
+import AddEditModal from "./AddEditModal";
 
-const Table = () => {
+export default function EmployeesTable() {
   const [employees, setEmployees] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const listEmployees = () => {
     axios
@@ -18,8 +19,6 @@ const Table = () => {
       });
   };
 
-  const [showModal, setShowModal] = useState(false);
-
   const handleShowModal = () => {
     setShowModal(true);
   };
@@ -30,10 +29,10 @@ const Table = () => {
 
   return (
     <>
-      <button className="actionButton" id="myBtn" onClick={() => handleShowModal()}>
+      <button type="button" className="actionButton" onClick={() => handleShowModal()}>
         Add Employee
       </button>
-      {showModal && <ModalForm visible={showModal} handleVisible={setShowModal} action="add" update={listEmployees} />}
+      {showModal && <AddEditModal visible={showModal} handleVisible={setShowModal} action="add" update={listEmployees} />}
       <table>
         <thead>
           <tr>
@@ -44,10 +43,8 @@ const Table = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>{employees && employees.map((employee) => <Row key={employee._id} id={employee._id} name={employee.name} email={employee.email} startDate={employee.startDate} team={employee.team} listEmployees={listEmployees} />)}</tbody>
+        <tbody>{employees && employees.map((employee) => <EmployeeRow key={employee._id} id={employee._id} name={employee.name} email={employee.email} startDate={employee.startDate} team={employee.team} listEmployees={listEmployees} />)}</tbody>
       </table>
     </>
   );
-};
-
-export default Table;
+}

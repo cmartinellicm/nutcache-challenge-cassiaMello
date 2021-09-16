@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { apiURL } from "../App";
 import axios from "axios";
 
-const ModalView = (props) => {
+export default function EmployeeModal(props) {
   const [employee, setEmployee] = useState({
     name: "",
     birthDate: "",
@@ -32,7 +32,7 @@ const ModalView = (props) => {
 
   return (
     <>
-      <div id="myModal" className={modalClass}>
+      <div className={modalClass}>
         <div className="modal-content">
           <span className="close" onClick={() => handleClose()}>
             &times;
@@ -43,31 +43,31 @@ const ModalView = (props) => {
           <table>
             <tbody>
               <tr>
-                <td className="modalViewLabel">Name</td>
+                <td className="employeeModalLabel">Name</td>
                 <td>{employee.name}</td>
               </tr>
               <tr>
-                <td className="modalViewLabel">Birth Date</td>
+                <td className="employeeModalLabel">Birth Date</td>
                 <td>{employee.birthDate}</td>
               </tr>
               <tr>
-                <td className="modalViewLabel">Gender</td>
+                <td className="employeeModalLabel">Gender</td>
                 <td>{employee.gender}</td>
               </tr>
               <tr>
-                <td className="modalViewLabel">Email</td>
+                <td className="employeeModalLabel">Email</td>
                 <td>{employee.email}</td>
               </tr>
               <tr>
-                <td className="modalViewLabel">CPF</td>
+                <td className="employeeModalLabel">CPF</td>
                 <td>{employee.cpf}</td>
               </tr>
               <tr>
-                <td className="modalViewLabel">Start Date</td>
+                <td className="employeeModalLabel">Start Date</td>
                 <td>{employee.startDate}</td>
               </tr>
               <tr>
-                <td className="modalViewLabel">Team</td>
+                <td className="employeeModalLabel">Team</td>
                 <td>{employee.team}</td>
               </tr>
             </tbody>
@@ -76,6 +76,4 @@ const ModalView = (props) => {
       </div>
     </>
   );
-};
-
-export default ModalView;
+}
