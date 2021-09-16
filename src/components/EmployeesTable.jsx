@@ -32,7 +32,7 @@ export default function EmployeesTable() {
       <button type="button" className="actionButton" onClick={() => handleShowModal()}>
         Add Employee
       </button>
-      {showModal && <AddEditModal visible={showModal} handleVisible={setShowModal} action="add" update={listEmployees} />}
+      {showModal && <AddEditModal visible={showModal} handleVisible={setShowModal} action="add" updateTable={listEmployees} />}
       <table>
         <thead>
           <tr>
@@ -43,7 +43,7 @@ export default function EmployeesTable() {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>{employees && employees.map((employee) => <EmployeeRow key={employee._id} employee={employee} listEmployees={listEmployees} />)}</tbody>
+        <tbody>{employees && employees.map((employee) => <EmployeeRow key={employee._id} employee={employee} updateTable={listEmployees} />)}</tbody>
       </table>
     </>
   );

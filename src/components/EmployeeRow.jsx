@@ -3,7 +3,7 @@ import AddEditModal from "./AddEditModal";
 import EmployeeModal from "./EmployeeModal";
 import DeleteButton from "./DeleteButton";
 
-export default function EmployeeRow({ employee }) {
+export default function EmployeeRow({ employee, updateTable }) {
   const [showAddEditModal, setShowAddEditModal] = useState(false);
   const [showEmployeeModal, setShowEmployeeModal] = useState(false);
 
@@ -30,9 +30,9 @@ export default function EmployeeRow({ employee }) {
         <button type="button" className="actionButton" onClick={() => handleShowAddEditModal()}>
           Edit
         </button>
-        {showAddEditModal && <AddEditModal visible={showAddEditModal} handleVisible={setShowAddEditModal} id={employee.id} action="edit" update={employee.listEmployees} />}
+        {showAddEditModal && <AddEditModal visible={showAddEditModal} handleVisible={setShowAddEditModal} employeeId={employee._id} action="edit" updateTable={updateTable} />}
 
-        <DeleteButton id={employee.id} name={employee.name} action="delete" update={employee.listEmployees} />
+        <DeleteButton id={employee.id} name={employee.name} action="delete" updateTable={updateTable} />
       </td>
     </tr>
   );

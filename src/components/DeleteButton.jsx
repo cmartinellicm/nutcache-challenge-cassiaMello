@@ -4,7 +4,7 @@ import axios from "axios";
 
 const DeleteButton = (props) => {
   const updateTable = () => {
-    props.update();
+    props.updateTable();
   };
 
   const handleAction = () => {

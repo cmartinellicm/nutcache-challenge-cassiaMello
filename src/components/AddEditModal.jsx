@@ -3,8 +3,8 @@ import axios from "axios";
 import InputMask from "react-input-mask";
 import { apiURL } from "../App";
 
-export default function AddEditModal(props) {
-  const [employee, setEmployee] = useState({
+export default function AddEditModal({ visible, handleVisible, employeeId, action, updateTable }) {
+  const [newEmployee, setNewEmployee] = useState({
     name: "",
     birthDate: "",
     gender: "",
@@ -14,38 +14,31 @@ export default function AddEditModal(props) {
     team: "",
   });
 
-  const modalClass = props.visible ? "modal show-modal" : "modal hide-modal";
+  const modalClass = visible ? "modal show-modal" : "modal hide-modal";
 
   useEffect(() => {
-    switch (props.action) {
-      case "add":
-        setEmployee({ name: "", birthDate: "", gender: "", email: "", cpf: "", startDate: "", team: "" });
-        break;
-      case "edit":
-        axios
-          .get(apiURL + "/nutemployee/" + props.id)
-          .then((response) => {
-            setEmployee(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        break;
-      default:
-        break;
+    if (action === "edit") {
+      axios
+        .get(apiURL + "/nutemployee/" + employeeId)
+        .then((response) => {
+          setNewEmployee(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }, [props.action, props.id]);
+  }, [action, employeeId]);
 
-  const updateTable = () => {
-    props.update();
+  const handleClose = () => {
+    handleVisible(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    switch (props.action) {
+    switch (action) {
       case "add":
         axios
-          .post(apiURL + "/nutemployee", { name: employee.name, birthDate: employee.birthDate, gender: employee.gender, email: employee.email, cpf: employee.cpf, startDate: employee.startDate, team: employee.team })
+          .post(apiURL + "/nutemployee", newEmployee)
           .then(() => {
             alert("Employee created successfully!");
             handleClose();
@@ -56,8 +49,17 @@ export default function AddEditModal(props) {
           });
         break;
       case "edit":
+        console.log(newEmployee);
         axios
-          .put(apiURL + "/nutemployee/" + props.id, { name: employee.name, birthDate: employee.birthDate, gender: employee.gender, email: employee.email, cpf: employee.cpf, startDate: employee.startDate, team: employee.team })
+          .put(apiURL + "/nutemployee/" + newEmployee._id, {
+            name: newEmployee.name,
+            birthDate: newEmployee.birthDate,
+            gender: newEmployee.gender,
+            email: newEmployee.email,
+            cpf: newEmployee.cpf,
+            startDate: newEmployee.startDate,
+            team: newEmployee.team,
+          })
           .then(() => {
             alert("Employee updated successfully!");
             handleClose();
@@ -72,10 +74,6 @@ export default function AddEditModal(props) {
     }
   };
 
-  const handleClose = () => {
-    props.handleVisible(false);
-  };
-
   return (
     <>
       <div className={modalClass}>
@@ -84,9 +82,9 @@ export default function AddEditModal(props) {
             &times;
           </span>
 
-          <h1>{props.action === "add" ? "Add Employee" : "Edit Employee"}</h1>
+          <h1>{action === "add" ? "Add Employee" : "Edit Employee"}</h1>
 
-          <form id="registration" onSubmit={handleSubmit}>
+          <form id="registration">
             <table>
               <tbody>
                 <tr>
@@ -100,9 +98,9 @@ export default function AddEditModal(props) {
                       name="name"
                       id="name"
                       onChange={(e) => {
-                        setEmployee({ ...employee, name: e.target.value });
+                        setNewEmployee({ ...newEmployee, name: e.target.value });
                       }}
-                      value={employee.name}
+                      value={newEmployee.name}
                       size="50"
                       required
                     />
@@ -119,9 +117,9 @@ export default function AddEditModal(props) {
                       name="birthDate"
                       id="birthDate"
                       onChange={(e) => {
-                        setEmployee({ ...employee, birthDate: e.target.value });
+                        setNewEmployee({ ...newEmployee, birthDate: e.target.value });
                       }}
-                      value={employee.birthDate}
+                      value={newEmployee.birthDate}
                       size="30"
                       required
                     />
@@ -137,9 +135,9 @@ export default function AddEditModal(props) {
                       name="gender"
                       id="gender"
                       onChange={(e) => {
-                        setEmployee({ ...employee, gender: e.target.value });
+                        setNewEmployee({ ...newEmployee, gender: e.target.value });
                       }}
-                      value={employee.gender}
+                      value={newEmployee.gender}
                       required
                     >
                       <option value=""></option>
@@ -160,9 +158,9 @@ export default function AddEditModal(props) {
                       name="email"
                       id="email"
                       onChange={(e) => {
-                        setEmployee({ ...employee, email: e.target.value });
+                        setNewEmployee({ ...newEmployee, email: e.target.value });
                       }}
-                      value={employee.email}
+                      value={newEmployee.email}
                       size="40"
                       required
                     />
@@ -180,9 +178,9 @@ export default function AddEditModal(props) {
                       name="cpf"
                       id="cpf"
                       onChange={(e) => {
-                        setEmployee({ ...employee, cpf: e.target.value });
+                        setNewEmployee({ ...newEmployee, cpf: e.target.value });
                       }}
-                      value={employee.cpf}
+                      value={newEmployee.cpf}
                       required
                     />
                   </td>
@@ -199,9 +197,9 @@ export default function AddEditModal(props) {
                       name="startDate"
                       id="startDate"
                       onChange={(e) => {
-                        setEmployee({ ...employee, startDate: e.target.value });
+                        setNewEmployee({ ...newEmployee, startDate: e.target.value });
                       }}
-                      value={employee.startDate}
+                      value={newEmployee.startDate}
                       required
                     />
                   </td>
@@ -216,9 +214,9 @@ export default function AddEditModal(props) {
                       name="team"
                       id="team"
                       onChange={(e) => {
-                        setEmployee({ ...employee, team: e.target.value });
+                        setNewEmployee({ ...newEmployee, team: e.target.value });
                       }}
-                      value={employee.team}
+                      value={newEmployee.team}
                     >
                       <option value=""></option>
                       <option value="mobile">Mobile</option>
@@ -229,9 +227,8 @@ export default function AddEditModal(props) {
                 </tr>
               </tbody>
             </table>
-
-            <button className="actionButton" type="submit">
-              {props.action === "view" ? "Ok" : "Save"}
+            <button type="submit" className="actionButton" onClick={handleSubmit}>
+              Save
             </button>
           </form>
         </div>
