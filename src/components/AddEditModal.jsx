@@ -49,7 +49,6 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
           });
         break;
       case "edit":
-        console.log(newEmployee);
         axios
           .put(apiURL + "/nutemployee/" + newEmployee._id, {
             name: newEmployee.name,
