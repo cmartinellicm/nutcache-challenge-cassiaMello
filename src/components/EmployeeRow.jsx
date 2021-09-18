@@ -32,7 +32,7 @@ export default function EmployeeRow({ employee, updateTable }) {
         </button>
         {showAddEditModal && <AddEditModal visible={showAddEditModal} handleVisible={setShowAddEditModal} employeeId={employee._id} action="edit" updateTable={updateTable} />}
 
-        <DeleteButton id={employee.id} name={employee.name} action="delete" updateTable={updateTable} />
+        <DeleteButton employee={employee} updateTable={updateTable} />
       </td>
     </tr>
   );

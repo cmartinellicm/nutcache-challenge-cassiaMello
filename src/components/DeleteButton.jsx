@@ -2,15 +2,11 @@ import React from "react";
 import { apiURL } from "../App";
 import axios from "axios";
 
-const DeleteButton = (props) => {
-  const updateTable = () => {
-    props.updateTable();
-  };
-
+const DeleteButton = ({ employee, updateTable }) => {
   const handleAction = () => {
-    if (window.confirm("Are you sure you want to delete employee " + props.name + "?")) {
+    if (window.confirm("Are you sure you want to delete employee " + employee.name + "?")) {
       axios
-        .delete(apiURL + "/nutemployee/" + props.id)
+        .delete(apiURL + "/nutemployee/" + employee._id)
         .then(() => {
           alert("Employee deleted");
           updateTable();
@@ -22,7 +18,7 @@ const DeleteButton = (props) => {
   };
 
   return (
-    <button className="actionButton" type="submit" onClick={handleAction}>
+    <button type="button" className="actionButton" onClick={handleAction}>
       Delete
     </button>
   );
