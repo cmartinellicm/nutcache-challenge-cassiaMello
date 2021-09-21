@@ -19,7 +19,7 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
   useEffect(() => {
     if (action === "edit") {
       axios
-        .get(apiURL + "/nutemployee/" + employeeId)
+        .get(`${apiURL}/nutemployee/${employeeId}`)
         .then((response) => {
           setNewEmployee(response.data);
         })
@@ -33,43 +33,82 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
     handleVisible(false);
   };
 
+  const validateCpf = () => {
+    let cpf = newEmployee.cpf.replace(/\D/g, "");
+    let cpfNumbers = cpf.substring(0, 9);
+    let cpfDigits = cpf.substring(9);
+
+    // First Validation
+    let firstSum = 0;
+
+    for (let i = 10; i > 1; i--) {
+      firstSum += cpfNumbers.charAt(10 - i) * i;
+    }
+    let firstValidation = firstSum % 11 < 2 ? 0 : 11 - (firstSum % 11);
+
+    if (firstValidation != cpfDigits.charAt(0)) {
+      return false; // CPF not valid
+    }
+
+    // Second Validation
+    let secondSum = 0;
+    cpfNumbers = cpf.substring(0, 10);
+
+    for (let k = 11; k > 1; k--) {
+      secondSum += cpfNumbers.charAt(11 - k) * k;
+    }
+
+    let secondValidation = secondSum % 11 < 2 ? 0 : 11 - (secondSum % 11);
+
+    if (secondValidation != cpfDigits.charAt(1)) {
+      return false; // CPF not valid
+    }
+
+    return true; // CPF valid
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    switch (action) {
-      case "add":
-        axios
-          .post(apiURL + "/nutemployee", newEmployee)
-          .then(() => {
-            alert("Employee created successfully!");
-            handleClose();
-            updateTable();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        break;
-      case "edit":
-        axios
-          .put(apiURL + "/nutemployee/" + newEmployee._id, {
-            name: newEmployee.name,
-            birthDate: newEmployee.birthDate,
-            gender: newEmployee.gender,
-            email: newEmployee.email,
-            cpf: newEmployee.cpf,
-            startDate: newEmployee.startDate,
-            team: newEmployee.team,
-          })
-          .then(() => {
-            alert("Employee updated successfully!");
-            handleClose();
-            updateTable();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        break;
-      default:
-        break;
+
+    if (!validateCpf()) {
+      alert("CPF not valid!");
+    } else {
+      switch (action) {
+        case "add":
+          axios
+            .post(`${apiURL}/nutemployee`, newEmployee)
+            .then(() => {
+              alert("Employee created successfully!");
+              handleClose();
+              updateTable();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          break;
+        case "edit":
+          axios
+            .put(`${apiURL}/nutemployee/${newEmployee._id}`, {
+              name: newEmployee.name,
+              birthDate: newEmployee.birthDate,
+              gender: newEmployee.gender,
+              email: newEmployee.email,
+              cpf: newEmployee.cpf,
+              startDate: newEmployee.startDate,
+              team: newEmployee.team,
+            })
+            .then(() => {
+              alert("Employee updated successfully!");
+              handleClose();
+              updateTable();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          break;
+        default:
+          break;
+      }
     }
   };
 
@@ -95,7 +134,6 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
                       className="modalInput"
                       type="text"
                       name="name"
-                      id="name"
                       onChange={(e) => {
                         setNewEmployee({ ...newEmployee, name: e.target.value });
                       }}
@@ -114,7 +152,6 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
                       className="modalInput"
                       type="date"
                       name="birthDate"
-                      id="birthDate"
                       onChange={(e) => {
                         setNewEmployee({ ...newEmployee, birthDate: e.target.value });
                       }}
@@ -132,7 +169,6 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
                     <select
                       className="modalInput"
                       name="gender"
-                      id="gender"
                       onChange={(e) => {
                         setNewEmployee({ ...newEmployee, gender: e.target.value });
                       }}
@@ -155,7 +191,6 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
                       className="modalInput"
                       type="email"
                       name="email"
-                      id="email"
                       onChange={(e) => {
                         setNewEmployee({ ...newEmployee, email: e.target.value });
                       }}
@@ -175,7 +210,6 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
                       className="modalInput"
                       type="text"
                       name="cpf"
-                      id="cpf"
                       onChange={(e) => {
                         setNewEmployee({ ...newEmployee, cpf: e.target.value });
                       }}
@@ -189,12 +223,10 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
                     <label htmlFor="startDate">Start Date</label>
                   </td>
                   <td className="modalTable">
-                    <InputMask
-                      mask="99/9999"
+                    <input
                       className="modalInput"
-                      type="text"
+                      type="month"
                       name="startDate"
-                      id="startDate"
                       onChange={(e) => {
                         setNewEmployee({ ...newEmployee, startDate: e.target.value });
                       }}
@@ -211,7 +243,6 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
                     <select
                       className="modalInput"
                       name="team"
-                      id="team"
                       onChange={(e) => {
                         setNewEmployee({ ...newEmployee, team: e.target.value });
                       }}

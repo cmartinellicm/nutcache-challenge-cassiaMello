@@ -10,7 +10,7 @@ export default function EmployeesTable() {
 
   const listEmployees = () => {
     axios
-      .get(apiURL + "/nutemployee")
+      .get(`${apiURL}/nutemployee`)
       .then((response) => {
         setEmployees(response.data);
       })

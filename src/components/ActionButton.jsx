@@ -19,7 +19,7 @@ const ActionButton = ({ action, employee, updateTable }) => {
       case "Delete":
         if (window.confirm("Are you sure you want to delete employee " + employee.name + "?")) {
           axios
-            .delete(apiURL + "/nutemployee/" + employee._id)
+            .delete(`${apiURL}/nutemployee/${employee._id}`)
             .then(() => {
               alert("Employee deleted");
               updateTable();
