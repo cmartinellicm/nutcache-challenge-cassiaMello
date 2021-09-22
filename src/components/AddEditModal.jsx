@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import InputMask from "react-input-mask";
-import { apiURL } from "../App";
+// import { apiURL } from "../App";
+import { ApiContext } from "../App";
 
 export default function AddEditModal({ visible, handleVisible, employeeId, action, updateTable }) {
+  const apiURL = useContext(ApiContext);
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     birthDate: "",
@@ -27,7 +29,7 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
           console.log(error);
         });
     }
-  }, [action, employeeId]);
+  }, [action, employeeId, apiURL]);
 
   const handleClose = () => {
     handleVisible(false);
@@ -46,7 +48,7 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
     }
     let firstValidation = firstSum % 11 < 2 ? 0 : 11 - (firstSum % 11);
 
-    if (firstValidation != cpfDigits.charAt(0)) {
+    if (firstValidation !== parseInt(cpfDigits.charAt(0))) {
       return false; // CPF not valid
     }
 
@@ -60,7 +62,7 @@ export default function AddEditModal({ visible, handleVisible, employeeId, actio
 
     let secondValidation = secondSum % 11 < 2 ? 0 : 11 - (secondSum % 11);
 
-    if (secondValidation != cpfDigits.charAt(1)) {
+    if (secondValidation !== parseInt(cpfDigits.charAt(1))) {
       return false; // CPF not valid
     }
 

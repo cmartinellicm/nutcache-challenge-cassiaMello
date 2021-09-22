@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { apiURL } from "../App";
+// import { apiURL } from "../App";
 import AddEditModal from "./AddEditModal";
 import EmployeeModal from "./EmployeeModal";
+import { ApiContext } from "../App";
 
 const ActionButton = ({ action, employee, updateTable }) => {
   const [showAddEditModal, setShowAddEditModal] = useState(false);
   const [showEmployeeModal, setShowEmployeeModal] = useState(false);
+  const apiURL = useContext(ApiContext);
 
   const handleAction = () => {
     switch (action) {

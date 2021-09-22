@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { apiURL } from "../App";
+// import { apiURL } from "../App";
 import EmployeeRow from "./EmployeeRow";
 import AddEditModal from "./AddEditModal";
+import { ApiContext } from "../App";
 
 export default function EmployeesTable() {
   const [employees, setEmployees] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const apiURL = useContext(ApiContext);
 
   const listEmployees = () => {
     axios
