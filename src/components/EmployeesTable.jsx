@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-// import { apiURL } from "../App";
 import EmployeeRow from "./EmployeeRow";
 import AddEditModal from "./AddEditModal";
 import { ApiContext } from "../App";
@@ -8,7 +7,7 @@ import { ApiContext } from "../App";
 export default function EmployeesTable() {
   const [employees, setEmployees] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const apiURL = useContext(ApiContext);
+  const { apiURL } = useContext(ApiContext);
 
   const listEmployees = () => {
     axios
@@ -17,7 +16,7 @@ export default function EmployeesTable() {
         setEmployees(response.data);
       })
       .catch((error) => {
-        console.log(error.response.status);
+        console.log(error);
       });
   };
 
@@ -27,7 +26,7 @@ export default function EmployeesTable() {
 
   useEffect(() => {
     listEmployees();
-  }, []);
+  }, [apiURL]);
 
   return (
     <>

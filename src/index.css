@@ -12,6 +12,11 @@ h1 {
   font-weight: 700;
 }
 
+/* Endpoint Input */
+.endpoint-input {
+  padding-top: 10px;
+}
+
 /* Table */
 table {
   border-collapse: collapse;

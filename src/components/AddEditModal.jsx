@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import InputMask from "react-input-mask";
-// import { apiURL } from "../App";
 import { ApiContext } from "../App";
 
 export default function AddEditModal({ visible, handleVisible, employeeId, action, updateTable }) {
-  const apiURL = useContext(ApiContext);
+  const { apiURL } = useContext(ApiContext);
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     birthDate: "",

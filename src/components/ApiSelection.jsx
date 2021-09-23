@@ -1,27 +1,32 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ApiContext } from "../App";
 
 export default function ApiSelection() {
-  const [apiURL, setApiURL] = useState("");
+  const { apiURL, setApiURL } = useContext(ApiContext);
   const [chosenEndpoint, setChosenEndpoint] = useState("");
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setApiURL(e.target.value);
-  };
-
   const handleClick = () => {
-    setChosenEndpoint(apiURL);
+    setApiURL(chosenEndpoint);
   };
-  //   https://crudcrud.com/api/d06ae6a21a5640b99a09e1f8935bc6db
+  // INACTIVE  https://crudcrud.com/api/d06ae6a21a5640b99a09e1f8935bc6db
+  // ACTIVE  https://crudcrud.com/api/ad878d661ce9443089c31906b5d1e4f0
 
   return (
-    <div>
-      <label htmlFor="apiEndpoint">Enter API Endpoint:</label>
-      <input className="modalInput" type="text" name="apiEndpoint" onChange={handleChange} value={apiURL} />
+    <div className="endpoint-input">
+      <input
+        className="modalInput"
+        type="text"
+        name="apiEndpoint"
+        placeholder="Please enter API endpoint here"
+        size="70"
+        value={chosenEndpoint}
+        onChange={(e) => {
+          setChosenEndpoint(e.target.value);
+        }}
+      />
       <button type="submit" onClick={handleClick}>
-        OK
+        Show
       </button>
-      <h3>{chosenEndpoint}</h3>
     </div>
   );
 }
