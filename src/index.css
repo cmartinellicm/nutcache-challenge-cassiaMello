@@ -17,6 +17,10 @@ h1 {
   padding-top: 10px;
 }
 
+.error {
+  color: red;
+}
+
 /* Table */
 table {
   border-collapse: collapse;

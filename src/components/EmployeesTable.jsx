@@ -5,18 +5,24 @@ import AddEditModal from "./AddEditModal";
 import { ApiContext } from "../App";
 
 export default function EmployeesTable() {
+  const { apiURL } = useContext(ApiContext);
   const [employees, setEmployees] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const { apiURL } = useContext(ApiContext);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const listEmployees = () => {
     axios
       .get(`${apiURL}/nutemployee`)
       .then((response) => {
         setEmployees(response.data);
+        setErrorMessage("");
       })
       .catch((error) => {
-        console.log(error);
+        if (typeof error.response === "undefined") {
+          setErrorMessage("Please type a valid endpoint above.");
+        } else {
+          console.log(error);
+        }
       });
   };
 
@@ -30,6 +36,7 @@ export default function EmployeesTable() {
 
   return (
     <>
+      <h5 className="error">{errorMessage}</h5>
       <button type="button" className="actionButton" onClick={() => handleShowModal()}>
         Add Employee
       </button>
